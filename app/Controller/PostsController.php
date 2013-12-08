@@ -44,8 +44,18 @@ class PostsController extends AppController {
                 $this->Session->setFlash('Sua postagem foi atualizada!');
                 $this->redirect(array('action' => 'index'));
             }
+        }        
+    }
+    
+    public function delete($id) {
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        } else {
+            if ($this->Post->delete($id)) {
+                $this->Session->setFlash('A postagem com id ' . $id . ' foi excluída!');
+                $this->redirect(array('action' => 'index'));
+            }
         }
-        
     }
 
 }
